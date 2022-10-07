@@ -11,6 +11,17 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@main
+      - name: Build latest ldid
+        run: |
+          # Install ldid then override so theos-build doesn't return non-zero for install
+          brew install openssl ldid
+          export PKG_CONFIG_PATH="/usr/local/opt/openssl@3/lib/pkgconfig"
+          sudo rm /usr/local/bin/ldid
+          git clone https://github.com/ProcursusTeam/ldid/
+          cd ldid
+          make -j$(sysctl -n hw.ncpu) install
+          cd
+
       - name: theos-build
         uses: L1ghtmann/theos-build@main
 

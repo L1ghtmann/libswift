@@ -14,9 +14,8 @@ all::
 	$(ECHO_NOTHING)mkdir -p $(OBJ_PATH) $(TMP_PATH)$(ECHO_END)
 	$(ECHO_NOTHING)rsync -a "$(XCODE_USR)"/lib/swift/iphoneos/libswift*.a $(TMP_PATH)$(ECHO_END)
 	$(ECHO_NOTHING)for i in $(TMP_PATH)/*.a; do clang -fpic -shared -Wl,-all_load "$i" -o "$(basename $i .a)".dylib; done$(ECHO_END)
-	$(ECHO_NOTHING)find $(TMP_PATH) -type f -name "*.dylib" -exec mv {} $(OBJ_PATH) \;$(ECHO_END)
+	$(ECHO_NOTHING)find $(TMP_PATH) -type f -name "*.dylib" -exec ldid -S {} \; -exec mv {} $(OBJ_PATH) \;$(ECHO_END)
 	$(ECHO_NOTHING)rm -rf $(TMP_PATH)$(ECHO_END)
-	$(ECHO_NOTHING)ldid -S $(OBJ_PATH)/*$(ECHO_END)
 
 stage::
 	$(ECHO_NOTHING)mkdir -p $(THEOS_STAGING_DIR)/$(INSTALL_PATH)$(ECHO_END)
