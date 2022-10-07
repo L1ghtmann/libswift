@@ -10,6 +10,7 @@ include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/null.mk
 
 all::
+	find . -type f -name "libswift*.dylib" -print
 	$(ECHO_NOTHING)rm -rf $(OBJ_PATH)$(ECHO_END)
 	$(ECHO_NOTHING)mkdir -p $(OBJ_PATH)$(ECHO_END)
 	$(ECHO_NOTHING)rsync -rav "$(XCODE_USR)"/lib/swift/iphoneos/libswift*.a $(OBJ_PATH)$(ECHO_END)
