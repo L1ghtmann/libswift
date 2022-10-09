@@ -3,7 +3,7 @@ INSTALL_PATH := /usr/lib/libswift/stable
 OBJ_PATH = $(THEOS_OBJ_DIR)
 
 # XCODE ?= $(shell xcode-select -p)
-XCODE ?= /Applications/Xcode_14.0.1.app/Contents/Developer
+XCODE ?= /Applications/Xcode_13.0.app/Contents/Developer
 XCODE_USR = $(XCODE)/Toolchains/XcodeDefault.xctoolchain/usr
 
 include $(THEOS)/makefiles/common.mk
