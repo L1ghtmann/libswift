@@ -11,9 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Build Deb
-        uses: L1ghtmann/theos-build@main
-        with:
-          extra_args: "XCODE=/Applications/Xcode_14.0.1.app FINALPACKAGE=1"
+        run: |
+          brew install ldid xz
+          export THEOS=~/theos
+          git clone --recursive https://github.com/theos/theos $THEOS
+          make clean package XCODE=/Applications/Xcode_14.0.1.app FINALPACKAGE=1
 
       - uses: actions/upload-artifact@main
         with:
